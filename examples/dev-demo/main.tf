@@ -16,7 +16,7 @@ provider "aws" {
 }
 
 module "worker" {
-  source = "../.."
+  source = "../../"
 
   region = var.region
   name   = var.name
@@ -36,12 +36,11 @@ module "worker" {
 
   launch_configuration_enable = var.launch_configuration_enable
   launch_template_enable      = var.launch_template_enable
-
   launch_each_subnet          = var.launch_each_subnet
+
   associate_public_ip_address = var.associate_public_ip_address
 
-  instance_type = var.instance_type
-
+  instance_type   = var.instance_type
   mixed_instances = var.mixed_instances
 
   volume_type = var.volume_type
