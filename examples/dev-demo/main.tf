@@ -2,11 +2,11 @@
 
 terraform {
   backend "s3" {
-    region = "ap-northeast-2"
-    bucket = "terraform-mz-seoul"
-    key    = "eks-demo-worker.tfstate"
-    # encrypt        = true
-    # dynamodb_table = "terraform-resource-lock"
+    region         = "ap-northeast-2"
+    bucket         = "terraform-mz-seoul"
+    key            = "eks-demo-worker.tfstate"
+    dynamodb_table = "terraform-mz-seoul"
+    encrypt        = true
   }
   required_version = ">= 0.12"
 }
@@ -16,7 +16,7 @@ provider "aws" {
 }
 
 module "worker" {
-  source = "../../"
+  source = "../.."
 
   region = var.region
   name   = var.name
