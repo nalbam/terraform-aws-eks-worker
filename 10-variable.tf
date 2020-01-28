@@ -105,3 +105,12 @@ variable "key_name" {
 variable "key_path" {
   default = ""
 }
+
+variable "tags" {
+  type = list(object({
+    key                 = string
+    value               = string
+    propagate_at_launch = bool
+  }))
+  default = []
+}

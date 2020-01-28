@@ -1,7 +1,7 @@
 # worker
 
 module "worker" {
-  source = "github.com/nalbam/terraform-aws-asg?ref=v0.12.18"
+  source = "github.com/nalbam/terraform-aws-asg?ref=v0.12.19"
   # source = "../terraform-aws-asg"
 
   name = var.name
@@ -38,26 +38,5 @@ module "worker" {
 
   security_groups = [aws_security_group.worker.id]
 
-  tags = [
-    {
-      key                 = "KubernetesCluster"
-      value               = var.cluster_name
-      propagate_at_launch = true
-    },
-    {
-      key                 = "kubernetes.io/cluster/${var.cluster_name}"
-      value               = "owned"
-      propagate_at_launch = true
-    },
-    {
-      key                 = "k8s.io/cluster-autoscaler/${var.cluster_name}"
-      value               = "owned"
-      propagate_at_launch = true
-    },
-    {
-      key                 = "k8s.io/cluster-autoscaler/enabled"
-      value               = "true"
-      propagate_at_launch = true
-    },
-  ]
+  tags = local.worker_tags
 }
