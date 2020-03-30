@@ -50,6 +50,8 @@ data "aws_iam_policy_document" "route53" {
       "route53:ListHostedZones",
       "route53:ListResourceRecordSets",
     ]
-    resources = ["*"]
+    resources = [
+      "arn:aws:route53:::*",
+    ]
   }
 }
