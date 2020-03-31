@@ -47,11 +47,19 @@ data "aws_iam_policy_document" "route53" {
     effect = "Allow"
     actions = [
       "route53:ChangeResourceRecordSets",
+    ]
+    resources = [
+      "arn:aws:route53:::hostedzone/*",
+    ]
+  }
+
+  statement {
+    sid    = "eksWorkerRoute53Select"
+    effect = "Allow"
+    actions = [
       "route53:ListHostedZones",
       "route53:ListResourceRecordSets",
     ]
-    resources = [
-      "arn:aws:route53:::*",
-    ]
+    resources = ["*"]
   }
 }
