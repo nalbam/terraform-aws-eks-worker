@@ -5,11 +5,11 @@ variable "region" {
 }
 
 variable "name" {
-  description = "Name of the worker, e.g: seoul-dev-demo-eks-worker"
+  description = "Name of the worker, e.g: eks-demo-worker"
 }
 
 variable "cluster_name" {
-  description = "Name of the cluster, e.g: seoul-dev-demo-eks"
+  description = "Name of the cluster, e.g: eks-demo"
 }
 
 variable "cluster_endpoint" {
