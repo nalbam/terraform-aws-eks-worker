@@ -114,3 +114,13 @@ variable "tags" {
   }))
   default = []
 }
+
+variable "node_labels" {
+  # "cluster_name=eks-demo"
+  default = ""
+}
+
+variable "node_taints" {
+  # "role=ops:NoSchedule"
+  default = ""
+}
