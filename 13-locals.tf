@@ -10,9 +10,9 @@ locals {
 /etc/eks/bootstrap.sh \
   --apiserver-endpoint '${var.cluster_endpoint}' \
   --b64-cluster-ca '${var.cluster_certificate_authority}' \
+  --kubelet-extra-args --node-labels=cluster_name=${var.cluster_endpoint}
   '${var.cluster_name}'
 EOF
-
 }
 
 locals {

@@ -22,7 +22,7 @@ variable "cluster_security_group_id" {
 }
 
 variable "kubernetes_version" {
-  default = "1.14"
+  default = "1.16"
 }
 
 variable "vpc_id" {
