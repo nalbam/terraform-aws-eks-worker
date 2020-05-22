@@ -5,12 +5,22 @@ locals {
 }
 
 locals {
+  node_labels          = "cluster_name=${var.cluster_name}"
+  register_with_taints = "" # "role=ops:NoSchedule"
+
+  # kubelet_extra_args = [
+  #   "--node-labels=${local.node_labels}",
+  #   "--register-with-taints=${local.register_with_taints}",
+  # ]
+
+  kubelet_extra_args = "--node-labels=${local.node_labels} --register-with-taints=${local.register_with_taints}"
+
   user_data = <<EOF
 #!/bin/bash -xe
 /etc/eks/bootstrap.sh \
   --apiserver-endpoint '${var.cluster_endpoint}' \
   --b64-cluster-ca '${var.cluster_certificate_authority}' \
-  --kubelet-extra-args --node-labels=cluster_name=${var.cluster_name} \
+  --kubelet-extra-args '${local.kubelet_extra_args}' \
   '${var.cluster_name}'
 EOF
 }
