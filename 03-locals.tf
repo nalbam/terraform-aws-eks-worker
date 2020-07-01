@@ -21,29 +21,28 @@ EOF
 }
 
 locals {
-  worker_tags = concat(
-    [
-      {
-        key                 = "KubernetesCluster"
-        value               = var.cluster_name
-        propagate_at_launch = true
-      },
-      {
-        key                 = "kubernetes.io/cluster/${var.cluster_name}"
-        value               = "owned"
-        propagate_at_launch = true
-      },
-      {
-        key                 = "k8s.io/cluster-autoscaler/${var.cluster_name}"
-        value               = "owned"
-        propagate_at_launch = true
-      },
-      {
-        key                 = "k8s.io/cluster-autoscaler/enabled"
-        value               = "true"
-        propagate_at_launch = true
-      },
-    ],
+  def_tags = {
+    "KubernetesCluster"                         = var.cluster_name
+    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
+  }
+
+  asg_tags = {
+    "k8s.io/cluster-autoscaler/${var.cluster_name}" = "owned"
+    "k8s.io/cluster-autoscaler/enabled"             = "true"
+  }
+
+  merge_tags = merge(
+    local.def_tags,
+    local.asg_tags,
     var.tags,
   )
+
+  tags = [
+    for item in keys(local.merge_tags) :
+    map(
+      "key", item,
+      "value", element(values(local.merge_tags), index(keys(local.merge_tags), item)),
+      "propagate_at_launch", true,
+    )
+  ]
 }
