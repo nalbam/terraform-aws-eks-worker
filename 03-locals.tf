@@ -5,10 +5,10 @@ locals {
 }
 
 locals {
-  node_labels = "--node-labels=${var.node_labels}"
-  node_taints = "--register-with-taints=${var.node_taints}"
+  node_labels = var.node_labels != "" ? "--node-labels=${var.node_labels}" : ""
+  node_taints = var.node_taints != "" ? "--register-with-taints=${var.node_taints}" : ""
 
-  extra_args = "" # "${local.node_labels} ${local.node_taints}"
+  extra_args = "${local.node_labels} ${local.node_taints}"
 
   user_data = <<EOF
 #!/bin/bash -xe

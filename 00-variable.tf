@@ -117,6 +117,7 @@ variable "tags" {
 
 variable "node_labels" {
   # "cluster_name=eks-demo"
+  # "node.kubernetes.io/role=ops"
   default = ""
 }
 
