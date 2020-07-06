@@ -61,6 +61,10 @@ variable "associate_public_ip_address" {
   default = false
 }
 
+variable "autoscale_enable" {
+  default = true
+}
+
 variable "ami_id" {
   default = ""
 }
