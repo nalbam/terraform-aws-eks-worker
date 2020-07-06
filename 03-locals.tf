@@ -33,7 +33,7 @@ locals {
 
   merge_tags = merge(
     local.def_tags,
-    var.autoscale_enable ? local.asg_tags : [],
+    var.autoscale_enable ? local.asg_tags : {},
     var.tags,
   )
 
