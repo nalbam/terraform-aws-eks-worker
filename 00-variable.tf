@@ -18,11 +18,11 @@ variable "cluster_endpoint" {
 variable "cluster_certificate_authority" {
 }
 
-variable "cluster_security_group_id" {
+variable "cluster_role_name" {
   default = ""
 }
 
-variable "cluster_role_name" {
+variable "cluster_security_group_id" {
   default = ""
 }
 
