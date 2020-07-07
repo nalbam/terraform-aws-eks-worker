@@ -18,13 +18,17 @@ variable "cluster_endpoint" {
 variable "cluster_certificate_authority" {
 }
 
-variable "cluster_role_name" {
-  default = ""
+variable "kubernetes_version" {
+  default = "1.16"
 }
 
-variable "cluster_security_group_id" {
-  default = ""
-}
+# variable "cluster_role_name" {
+#   default = ""
+# }
+
+# variable "cluster_security_group_id" {
+#   default = ""
+# }
 
 variable "worker_role_name" {
   default = ""
@@ -32,10 +36,6 @@ variable "worker_role_name" {
 
 variable "worker_security_group_id" {
   default = ""
-}
-
-variable "kubernetes_version" {
-  default = "1.16"
 }
 
 variable "vpc_id" {
