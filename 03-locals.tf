@@ -36,13 +36,4 @@ locals {
     var.autoscale_enable ? local.asg_tags : {},
     var.tags,
   )
-
-  tags = [
-    for item in keys(local.merge_tags) :
-    map(
-      "key", item,
-      "value", element(values(local.merge_tags), index(keys(local.merge_tags), item)),
-      "propagate_at_launch", true,
-    )
-  ]
 }
