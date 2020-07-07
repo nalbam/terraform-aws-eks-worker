@@ -26,11 +26,11 @@ variable "cluster_role_name" {
   default = ""
 }
 
-variable "worker_security_group_id" {
+variable "worker_role_name" {
   default = ""
 }
 
-variable "worker_role_name" {
+variable "worker_security_group_id" {
   default = ""
 }
 

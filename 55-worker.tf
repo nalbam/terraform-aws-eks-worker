@@ -1,7 +1,7 @@
 # worker
 
 module "worker" {
-  source = "github.com/nalbam/terraform-aws-asg?ref=v0.12.24"
+  source = "github.com/nalbam/terraform-aws-asg?ref=v0.12.25"
   # source = "../terraform-aws-asg"
 
   name = var.name
@@ -36,7 +36,9 @@ module "worker" {
   key_name = var.key_name
   key_path = var.key_path
 
-  security_groups = [aws_security_group.worker.id]
+  role_name = var.worker_role_name
+
+  security_groups = [var.worker_security_group_id]
 
   tags = local.tags
 }
