@@ -7,7 +7,7 @@ data "terraform_remote_state" "vpc" {
   backend = "s3"
   config = {
     region = "ap-northeast-2"
-    bucket = "terraform-mz-seoul"
+    bucket = "terraform-nalbam-seoul"
     key    = "vpc-demo.tfstate"
   }
 }
@@ -16,7 +16,7 @@ data "terraform_remote_state" "eks" {
   backend = "s3"
   config = {
     region = "ap-northeast-2"
-    bucket = "terraform-mz-seoul"
+    bucket = "terraform-nalbam-seoul"
     key    = "eks-demo.tfstate"
   }
 }
