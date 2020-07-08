@@ -38,6 +38,10 @@ variable "worker_security_group_id" {
   default = ""
 }
 
+variable "worker_ami_id" {
+  default = ""
+}
+
 variable "vpc_id" {
   default = ""
 }
