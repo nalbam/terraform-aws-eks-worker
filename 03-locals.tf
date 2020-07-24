@@ -13,8 +13,8 @@ locals {
   user_data = <<EOF
 #!/bin/bash -xe
 /etc/eks/bootstrap.sh \
-  --apiserver-endpoint '${var.cluster_endpoint}' \
-  --b64-cluster-ca '${var.cluster_certificate_authority}' \
+  --apiserver-endpoint '${data.aws_eks_cluster.cluster.endpoint}' \
+  --b64-cluster-ca '${data.aws_eks_cluster.cluster.certificate_authority.0.data}' \
   --kubelet-extra-args '${local.extra_args}' \
   '${var.cluster_name}'
 EOF

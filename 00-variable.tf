@@ -12,11 +12,11 @@ variable "cluster_name" {
   description = "Name of the cluster, e.g: eks-demo"
 }
 
-variable "cluster_endpoint" {
-}
+# variable "cluster_endpoint" {
+# }
 
-variable "cluster_certificate_authority" {
-}
+# variable "cluster_certificate_authority" {
+# }
 
 variable "kubernetes_version" {
   default = "1.16"

@@ -1,5 +1,9 @@
 # output
 
+output "name" {
+  value = var.name
+}
+
 # output "iam_role_arn" {
 #   value = module.worker.iam_role_arn
 # }
