@@ -34,8 +34,9 @@ variable "worker_role_name" {
   default = ""
 }
 
-variable "worker_security_group_id" {
-  default = ""
+variable "worker_security_group_ids" {
+  type    = list(string)
+  default = []
 }
 
 variable "worker_ami_id" {
