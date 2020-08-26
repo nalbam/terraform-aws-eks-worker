@@ -120,11 +120,11 @@ variable "tags" {
 }
 
 variable "node_labels" {
-  # "role=ops,node.kubernetes.io/role=ops"
+  # "node-role.kubernetes.io/ops=ops,node-role=ops"
   default = ""
 }
 
 variable "node_taints" {
-  # "role=role:NoSchedule"
+  # "node-role=ops:NoSchedule"
   default = ""
 }
