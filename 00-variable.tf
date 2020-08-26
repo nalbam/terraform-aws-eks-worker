@@ -12,23 +12,9 @@ variable "cluster_name" {
   description = "Name of the cluster, e.g: eks-demo"
 }
 
-# variable "cluster_endpoint" {
-# }
-
-# variable "cluster_certificate_authority" {
-# }
-
 variable "kubernetes_version" {
   default = "1.16"
 }
-
-# variable "cluster_role_name" {
-#   default = ""
-# }
-
-# variable "cluster_security_group_id" {
-#   default = ""
-# }
 
 variable "worker_role_name" {
   default = ""
@@ -134,12 +120,11 @@ variable "tags" {
 }
 
 variable "node_labels" {
-  # "cluster_name=eks-demo"
-  # "node.kubernetes.io/role=ops"
+  # "role=ops,node.kubernetes.io/role=ops"
   default = ""
 }
 
 variable "node_taints" {
-  # "role=ops:NoSchedule"
+  # "role=role:NoSchedule"
   default = ""
 }
