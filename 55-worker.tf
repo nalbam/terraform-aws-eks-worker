@@ -17,7 +17,7 @@ module "worker" {
 
   associate_public_ip_address = var.associate_public_ip_address
 
-  ami_id = var.worker_ami_id
+  ami_id = local.worker_ami_id
 
   instance_type   = var.instance_type
   mixed_instances = var.mixed_instances

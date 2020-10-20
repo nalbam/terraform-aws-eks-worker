@@ -5,6 +5,10 @@ locals {
 }
 
 locals {
+  worker_ami_id = var.worker_ami_id != "" ? var.worker_ami_id : data.aws_ami.worker.id
+}
+
+locals {
   node_labels = var.node_labels != "" ? "--node-labels=${var.node_labels}" : ""
   node_taints = var.node_taints != "" ? "--register-with-taints=${var.node_taints}" : ""
 
