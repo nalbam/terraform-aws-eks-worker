@@ -12,10 +12,6 @@ variable "cluster_name" {
   description = "Name of the cluster, e.g: eks-demo"
 }
 
-variable "kubernetes_version" {
-  default = "1.16"
-}
-
 variable "worker_role_name" {
   default = ""
 }
