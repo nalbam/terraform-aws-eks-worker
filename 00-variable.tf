@@ -16,7 +16,12 @@ variable "worker_role_name" {
   default = ""
 }
 
-variable "worker_security_group_ids" {
+variable "worker_target_group_arns" {
+  type    = list(string)
+  default = []
+}
+
+variable "worker_security_groups" {
   type    = list(string)
   default = []
 }

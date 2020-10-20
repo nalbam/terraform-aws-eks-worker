@@ -14,7 +14,7 @@ data "aws_eks_cluster_auth" "cluster" {
 data "aws_ami" "worker" {
   filter {
     name   = "name"
-    values = ["amazon-eks-node-${data.aws_eks_cluster.cluster.version}-*"]
+    values = [local.worker_ami_prefix]
   }
 
   owners = ["602401143452"] # Amazon Account ID

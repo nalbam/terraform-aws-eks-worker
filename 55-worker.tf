@@ -2,7 +2,7 @@
 
 module "worker" {
   source  = "nalbam/asg/aws"
-  version = "0.12.31"
+  version = "0.12.32"
 
   name = var.name
 
@@ -38,7 +38,9 @@ module "worker" {
 
   role_name = var.worker_role_name
 
-  security_groups = var.worker_security_group_ids
+  target_group_arns = var.worker_target_group_arns
 
-  tags = local.merge_tags
+  security_groups = var.worker_security_groups
+
+  tags = local.tags
 }

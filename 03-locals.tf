@@ -5,6 +5,8 @@ locals {
 }
 
 locals {
+  worker_ami_prefix = format("amazon-eks-node-%s-*", data.aws_eks_cluster.cluster.version)
+
   worker_ami_id = var.worker_ami_id != "" ? var.worker_ami_id : data.aws_ami.worker.id
 }
 
@@ -35,7 +37,7 @@ locals {
     "k8s.io/cluster-autoscaler/enabled"             = "true"
   }
 
-  merge_tags = merge(
+  tags = merge(
     local.def_tags,
     var.autoscale_enable ? local.asg_tags : {},
     var.tags,
