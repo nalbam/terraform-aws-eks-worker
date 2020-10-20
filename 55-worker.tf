@@ -2,7 +2,7 @@
 
 module "worker" {
   source  = "nalbam/asg/aws"
-  version = "0.12.30"
+  version = "0.12.31"
 
   name = var.name
 
