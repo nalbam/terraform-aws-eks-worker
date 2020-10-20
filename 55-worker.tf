@@ -1,8 +1,8 @@
 # worker
 
 module "worker" {
-  source = "github.com/nalbam/terraform-aws-asg?ref=v0.12.29"
-  # source = "../terraform-aws-asg"
+  source  = "nalbam/asg/aws"
+  version = "0.12.30"
 
   name = var.name
 
