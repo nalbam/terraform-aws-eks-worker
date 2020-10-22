@@ -3,9 +3,9 @@
 terraform {
   backend "s3" {
     region         = "ap-northeast-2"
-    bucket         = "terraform-nalbam-seoul"
+    bucket         = "terraform-workshop-seoul"
     key            = "eks-demo-worker.tfstate"
-    dynamodb_table = "terraform-nalbam-seoul"
+    dynamodb_table = "terraform-resource-lock"
     encrypt        = true
   }
 }
