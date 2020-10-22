@@ -7,8 +7,8 @@ data "terraform_remote_state" "vpc" {
   backend = "s3"
   config = {
     region = "ap-northeast-2"
-    bucket = "terraform-workshop-seoul"
-    key    = "vpc-demo.tfstate"
+    bucket = "terraform-workshop-082867736673"
+    key    = "vpc-public.tfstate"
   }
 }
 
@@ -16,7 +16,7 @@ data "terraform_remote_state" "eks" {
   backend = "s3"
   config = {
     region = "ap-northeast-2"
-    bucket = "terraform-workshop-seoul"
+    bucket = "terraform-workshop-082867736673"
     key    = "eks-demo.tfstate"
   }
 }
@@ -26,7 +26,7 @@ variable "region" {
 }
 
 variable "name" {
-  default = "seoul-dev-demo-eks-worker"
+  default = "dev-demo-eks-worker"
 }
 
 variable "allow_ip_address" {
