@@ -5,7 +5,7 @@ variable "region" {
 }
 
 variable "name" {
-  description = "Name of the worker, e.g: eks-demo-worker"
+  description = "Name of the worker, e.g: worker"
 }
 
 variable "cluster_name" {

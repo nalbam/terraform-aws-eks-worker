@@ -4,7 +4,7 @@ module "worker" {
   source  = "nalbam/asg/aws"
   version = "0.12.35"
 
-  name = var.name
+  name = local.name
 
   vpc_id = var.vpc_id
 

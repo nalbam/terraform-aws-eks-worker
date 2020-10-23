@@ -1,7 +1,7 @@
 # output
 
 output "name" {
-  value = var.name
+  value = local.name
 }
 
 # output "iam_role_arn" {

@@ -1,8 +1,5 @@
 # variable
 
-data "aws_caller_identity" "current" {
-}
-
 data "terraform_remote_state" "vpc" {
   backend = "s3"
   config = {
@@ -21,12 +18,15 @@ data "terraform_remote_state" "eks" {
   }
 }
 
+data "aws_caller_identity" "current" {
+}
+
 variable "region" {
   default = "ap-northeast-2"
 }
 
 variable "name" {
-  default = "dev-demo-eks-worker"
+  default = "worker"
 }
 
 variable "allow_ip_address" {

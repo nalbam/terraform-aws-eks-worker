@@ -5,6 +5,10 @@ locals {
 }
 
 locals {
+  name = format("%s-%s", var.cluster_name, var.name)
+}
+
+locals {
   worker_ami_prefix = format("amazon-eks-node-%s-*", data.aws_eks_cluster.cluster.version)
 
   worker_ami_id = var.worker_ami_id != "" ? var.worker_ami_id : data.aws_ami.worker.id
