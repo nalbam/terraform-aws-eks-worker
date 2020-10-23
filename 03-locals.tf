@@ -32,6 +32,7 @@ EOF
 
 locals {
   def_tags = {
+    "Name"                                      = local.name
     "KubernetesCluster"                         = var.cluster_name
     "kubernetes.io/cluster/${var.cluster_name}" = "owned"
   }
@@ -42,8 +43,8 @@ locals {
   }
 
   tags = merge(
-    local.def_tags,
-    var.autoscale_enable ? local.asg_tags : {},
     var.tags,
+    var.autoscale_enable ? local.asg_tags : {},
+    local.def_tags,
   )
 }
