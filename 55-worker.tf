@@ -6,8 +6,8 @@ module "worker" {
 
   name = local.name
 
-  vpc_id     = var.vpc_id
-  subnet_ids = var.subnet_ids
+  vpc_id     = local.vpc_id
+  subnet_ids = local.subnet_ids
 
   launch_configuration_enable = var.launch_configuration_enable
   launch_template_enable      = var.launch_template_enable
