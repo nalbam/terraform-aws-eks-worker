@@ -9,8 +9,8 @@ locals {
 }
 
 locals {
-  vpc_id     = var.vpc_id != "" ? var.vpc_id : data.aws_eks_cluster.cluster.vpc_config["vpc_id"]
-  subnet_ids = var.subnet_ids != "" ? var.subnet_ids : data.aws_eks_cluster.cluster.vpc_config["subnet_ids"]
+  # vpc_id     = var.vpc_id != "" ? var.vpc_id : data.aws_eks_cluster.cluster.vpc_config["vpc_id"]
+  # subnet_ids = var.subnet_ids != "" ? var.subnet_ids : data.aws_eks_cluster.cluster.vpc_config["subnet_ids"]
 
   worker_ami_prefix = format("amazon-eks-node-%s-*", data.aws_eks_cluster.cluster.version)
 
