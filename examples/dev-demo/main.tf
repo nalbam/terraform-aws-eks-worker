@@ -26,10 +26,8 @@ module "worker" {
   cluster_security_group_id     = data.terraform_remote_state.eks.outputs.security_group_id
   kubernetes_version            = data.terraform_remote_state.eks.outputs.version
 
-  vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
-
+  vpc_id     = data.terraform_remote_state.vpc.outputs.vpc_id
   subnet_ids = data.terraform_remote_state.vpc.outputs.public_subnet_ids
-  subnet_azs = data.terraform_remote_state.vpc.outputs.public_subnet_azs
 
   allow_ip_address = var.allow_ip_address
 

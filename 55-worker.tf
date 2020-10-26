@@ -2,14 +2,12 @@
 
 module "worker" {
   source  = "nalbam/asg/aws"
-  version = "0.12.35"
+  version = "0.12.36"
 
   name = local.name
 
-  vpc_id = var.vpc_id
-
-  subnet_ids = var.subnet_ids
-  subnet_azs = var.subnet_azs
+  vpc_id     = local.vpc_id
+  subnet_ids = local.subnet_ids
 
   launch_configuration_enable = var.launch_configuration_enable
   launch_template_enable      = var.launch_template_enable
