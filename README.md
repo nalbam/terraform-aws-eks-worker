@@ -1,5 +1,6 @@
 # terraform-aws-eks-worker
 
+<!--- BEGIN_TF_DOCS --->
 ## Requirements
 
 No requirements.
@@ -52,3 +53,5 @@ No requirements.
 | aws\_launch\_configuration\_ids | n/a |
 | aws\_launch\_template\_ids | n/a |
 | name | n/a |
+
+<!--- END_TF_DOCS --->
