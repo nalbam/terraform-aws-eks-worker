@@ -2,7 +2,7 @@
 
 module "worker" {
   source  = "nalbam/asg/aws"
-  version = "0.12.36"
+  version = "0.13.1"
 
   name = local.name
 
