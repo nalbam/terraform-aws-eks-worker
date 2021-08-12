@@ -1,0 +1,27 @@
+# worker for single
+
+resource "aws_autoscaling_group" "worker" {
+  count = length(var.mixed_instances) > 0 ? 0 : 1
+
+  name_prefix = format("%s-", local.worker_name)
+
+  min_size = var.min
+  max_size = var.max
+
+  vpc_zone_identifier = var.subnet_ids
+  target_group_arns   = var.target_group_arns
+
+  launch_template {
+    id      = aws_launch_template.worker.id
+    version = "$Latest"
+  }
+
+  enabled_metrics = var.enabled_metrics
+
+  lifecycle {
+    create_before_destroy = true
+    ignore_changes        = [desired_capacity]
+  }
+
+  tags = local.asg_tags
+}

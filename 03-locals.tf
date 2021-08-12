@@ -5,49 +5,73 @@ locals {
 }
 
 locals {
-  name = format("%s-%s", var.cluster_name, var.name)
+  subgroup = var.subname == "" ? var.name : format("%s-%s", var.name, var.subname)
+  fullname = var.vername == "" ? local.subgroup : format("%s-%s", local.subgroup, var.vername)
+
+  cluster_name = var.cluster_info.name
+  worker_name  = format("%s-%s", local.cluster_name, local.fullname)
+
+  worker_ami_arch    = var.worker_ami_arch == "arm64" ? "amazon-eks-arm64-node" : "amazon-eks-node"
+  worker_ami_keyword = format("%s-%s-%s", local.worker_ami_arch, var.cluster_info.version, var.worker_ami_keyword)
+
+  ami_id = var.ami_id != "" ? var.ami_id : data.aws_ami.worker.id
 }
 
 locals {
-  vpc_id     = var.vpc_id != "" ? var.vpc_id : data.aws_eks_cluster.cluster.vpc_config.0.vpc_id
-  subnet_ids = length(var.subnet_ids) > 0 ? var.subnet_ids : data.aws_eks_cluster.cluster.vpc_config.0.subnet_ids
+  node_labels_map = merge(
+    {
+      "group"         = var.name
+      "subgroup"      = local.subgroup
+      "instancegroup" = local.fullname
+    },
+    var.node_labels,
+  )
 
-  worker_ami_prefix = format("amazon-eks-node-%s-*", data.aws_eks_cluster.cluster.version)
+  node_labels = replace(replace(jsonencode(local.node_labels_map), "/[\\{\\}\"\\s]/", ""), ":", "=")
+  node_taints = var.enable_taints ? format("--register-with-taints=group=%s:NoSchedule", var.name) : ""
+  log_levels  = var.log_levels > 0 ? format("--v=%s", var.log_levels) : ""
 
-  worker_ami_id = var.worker_ami_id != "" ? var.worker_ami_id : data.aws_ami.worker.id
-}
-
-locals {
-  node_labels = var.node_labels != "" ? "--node-labels=${var.node_labels}" : ""
-  node_taints = var.node_taints != "" ? "--register-with-taints=${var.node_taints}" : ""
-
-  extra_args = "${local.node_labels} ${local.node_taints}"
+  extra_args = "--node-labels=${local.node_labels} ${local.node_taints} ${local.log_levels}"
 
   user_data = <<EOF
 #!/bin/bash -xe
+mkdir -p ~/.docker && echo '${data.aws_ssm_parameter.docker_config.value}' > ~/.docker/config.json
+mkdir -p /var/lib/kubelet && echo '${data.aws_ssm_parameter.docker_config.value}' > /var/lib/kubelet/config.json
 /etc/eks/bootstrap.sh \
-  --apiserver-endpoint '${data.aws_eks_cluster.cluster.endpoint}' \
-  --b64-cluster-ca '${data.aws_eks_cluster.cluster.certificate_authority.0.data}' \
+  --apiserver-endpoint '${var.cluster_info.endpoint}' \
+  --b64-cluster-ca '${var.cluster_info.certificate_authority}' \
   --kubelet-extra-args '${local.extra_args}' \
-  '${var.cluster_name}'
+  '${local.cluster_name}'
 EOF
 }
 
 locals {
-  def_tags = {
-    "Name"                                      = local.name
-    "KubernetesCluster"                         = var.cluster_name
-    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
-  }
-
-  asg_tags = {
-    "k8s.io/cluster-autoscaler/${var.cluster_name}" = "owned"
-    "k8s.io/cluster-autoscaler/enabled"             = "true"
-  }
-
   tags = merge(
     var.tags,
-    var.autoscale_enable ? local.asg_tags : {},
-    local.def_tags,
+    {
+      "Name"                                        = local.worker_name
+      "KubernetesCluster"                           = local.cluster_name
+      "kubernetes.io/cluster/${local.cluster_name}" = "owned"
+      "krmt.io/group"                               = var.name
+      "krmt.io/subgroup"                            = local.subgroup
+      "krmt.io/instancegroup"                       = local.fullname
+    },
   )
+
+  eks_tags = merge(
+    local.tags,
+    var.enable_autoscale ? {
+      "k8s.io/cluster-autoscaler/${local.cluster_name}" = "owned"
+      "k8s.io/cluster-autoscaler/enabled"               = "true"
+    } : {},
+  )
+
+  asg_tags = [
+    for item in keys(local.eks_tags) :
+    tomap({
+      "key"                 = item
+      "value"               = element(values(local.eks_tags), index(keys(local.eks_tags), item))
+      "propagate_at_launch" = true
+    })
+  ]
 }

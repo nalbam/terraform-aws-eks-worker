@@ -1,37 +1,25 @@
 # variable
 
-variable "region" {
-  description = "The region to deploy the cluster in, e.g: us-east-1"
-}
-
 variable "name" {
-  description = "Name of the worker, e.g: worker"
+  description = "Name of the worker. e.g: worker"
+  type        = string
 }
 
-variable "cluster_name" {
-  description = "Name of the cluster, e.g: eks-demo"
+variable "subname" {
+  description = "Subname of the worker, e.g: a"
+  type        = string
+  default     = ""
 }
 
-variable "worker_role_name" {
-  default = ""
+variable "vername" {
+  description = "Version of the worker, e.g: v1"
+  type        = string
+  default     = ""
 }
 
-variable "worker_target_group_arns" {
-  type    = list(string)
-  default = []
-}
-
-variable "worker_security_groups" {
-  type    = list(string)
-  default = []
-}
-
-variable "worker_ami_id" {
-  default = ""
-}
-
-variable "vpc_id" {
-  default = ""
+variable "cluster_info" {
+  description = "Map of the cluster."
+  type        = map(string)
 }
 
 variable "subnet_ids" {
@@ -39,37 +27,37 @@ variable "subnet_ids" {
   default = []
 }
 
-variable "allow_ip_address" {
-  description = "List of IP Address to permit access"
-  type        = list(string)
-  default     = []
+variable "security_groups" {
+  type    = list(string)
+  default = []
 }
 
-variable "launch_configuration_enable" {
-  default = true
+variable "role_name" {
+  type = string
 }
 
-variable "launch_template_enable" {
-  default = false
+variable "target_group_arns" {
+  type    = list(string)
+  default = []
 }
 
-variable "launch_each_subnet" {
-  default = false
+variable "worker_ami_arch" {
+  type    = string
+  default = "x86_64" # arm64
 }
 
-variable "associate_public_ip_address" {
-  default = false
-}
-
-variable "autoscale_enable" {
-  default = true
+variable "worker_ami_keyword" {
+  type    = string
+  default = "*"
 }
 
 variable "ami_id" {
+  type    = string
   default = ""
 }
 
 variable "instance_type" {
+  type    = string
   default = "m5.large"
 }
 
@@ -78,19 +66,61 @@ variable "mixed_instances" {
   default = []
 }
 
+variable "associate_public_ip_address" {
+  default = false
+}
+
+variable "enable_autoscale" {
+  default = true
+}
+
+variable "enable_monitoring" {
+  default = true
+}
+
+variable "enabled_metrics" {
+  default = [
+    "GroupDesiredCapacity",
+    "GroupInServiceCapacity",
+    "GroupInServiceInstances",
+    "GroupMaxSize",
+    "GroupMinSize",
+    "GroupPendingCapacity",
+    "GroupPendingInstances",
+    "GroupStandbyCapacity",
+    "GroupStandbyInstances",
+    "GroupTerminatingCapacity",
+    "GroupTerminatingInstances",
+    "GroupTotalCapacity",
+    "GroupTotalInstances",
+  ]
+}
+
+variable "enable_taints" {
+  default = false
+}
+
+variable "ebs_optimized" {
+  default = true
+}
+
 variable "volume_type" {
+  type    = string
   default = "gp2"
 }
 
 variable "volume_size" {
-  default = "32"
+  type    = string
+  default = "50"
 }
 
 variable "min" {
+  type    = string
   default = "1"
 }
 
 variable "max" {
+  type    = string
   default = "5"
 }
 
@@ -102,12 +132,13 @@ variable "on_demand_rate" {
   default = "30"
 }
 
-variable "key_name" {
-  default = ""
+variable "log_levels" {
+  default = 3
 }
 
-variable "key_path" {
-  default = ""
+variable "key_name" {
+  type    = string
+  default = "eks_user"
 }
 
 variable "tags" {
@@ -116,11 +147,6 @@ variable "tags" {
 }
 
 variable "node_labels" {
-  # "node-role.kubernetes.io/ops=ops,node-role=ops"
-  default = ""
-}
-
-variable "node_taints" {
-  # "node-role=ops:NoSchedule"
-  default = ""
+  type    = map(string)
+  default = {}
 }
