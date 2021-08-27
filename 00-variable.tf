@@ -67,14 +67,17 @@ variable "mixed_instances" {
 }
 
 variable "associate_public_ip_address" {
+  type    = bool
   default = false
 }
 
 variable "enable_autoscale" {
+  type    = bool
   default = true
 }
 
 variable "enable_monitoring" {
+  type    = bool
   default = true
 }
 
@@ -97,10 +100,12 @@ variable "enabled_metrics" {
 }
 
 variable "enable_taints" {
+  type    = bool
   default = false
 }
 
 variable "ebs_optimized" {
+  type    = bool
   default = true
 }
 
@@ -115,24 +120,32 @@ variable "volume_size" {
 }
 
 variable "min" {
-  type    = string
-  default = "1"
+  type    = number
+  default = 1
 }
 
 variable "max" {
-  type    = string
-  default = "5"
+  type    = number
+  default = 5
+}
+
+variable "enable_spot" {
+  type    = bool
+  default = false
 }
 
 variable "on_demand_base" {
-  default = "1"
+  type    = number
+  default = 1
 }
 
 variable "on_demand_rate" {
-  default = "30"
+  type    = number
+  default = 30
 }
 
 variable "log_levels" {
+  type    = number
   default = 3
 }
 

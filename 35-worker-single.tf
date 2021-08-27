@@ -12,7 +12,7 @@ resource "aws_autoscaling_group" "worker" {
   target_group_arns   = var.target_group_arns
 
   launch_template {
-    id      = aws_launch_template.worker.id
+    id      = var.enable_spot ? aws_launch_template.worker_spot.id : aws_launch_template.worker.id
     version = "$Latest"
   }
 
