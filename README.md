@@ -29,8 +29,8 @@
 | instance\_type | n/a | `string` | `"m5.large"` | no |
 | key\_name | n/a | `string` | `"eks_user"` | no |
 | log\_levels | n/a | `number` | `3` | no |
-| max | n/a | `string` | `"5"` | no |
-| min | n/a | `string` | `"1"` | no |
+| max | n/a | `number` | `"5"` | no |
+| min | n/a | `number` | `"1"` | no |
 | mixed\_instances | n/a | `list(string)` | `[]` | no |
 | name | Name of the worker. e.g: worker | `string` | n/a | yes |
 | node\_labels | n/a | `map(string)` | `{}` | no |
