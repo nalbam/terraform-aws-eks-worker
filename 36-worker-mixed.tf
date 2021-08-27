@@ -20,7 +20,7 @@ resource "aws_autoscaling_group" "worker-mixed" {
 
     launch_template {
       launch_template_specification {
-        launch_template_id = var.enable_spot ? aws_launch_template.worker_spot.id : aws_launch_template.worker.id
+        launch_template_id = var.enable_spot ? aws_launch_template.worker_spot[0].id : aws_launch_template.worker[0].id
         version            = "$Latest"
       }
 

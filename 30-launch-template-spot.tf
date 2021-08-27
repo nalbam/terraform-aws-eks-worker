@@ -1,6 +1,8 @@
 # launch_template
 
 resource "aws_launch_template" "worker_spot" {
+  count = var.enable_spot ? 1 : 0
+
   name_prefix = format("%s-spot-", local.worker_name)
 
   image_id      = local.ami_id
