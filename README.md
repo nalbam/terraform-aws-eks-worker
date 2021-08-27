@@ -24,18 +24,19 @@
 | ebs\_optimized | n/a | `bool` | `true` | no |
 | enable\_autoscale | n/a | `bool` | `true` | no |
 | enable\_monitoring | n/a | `bool` | `true` | no |
+| enable\_spot | n/a | `bool` | `false` | no |
 | enable\_taints | n/a | `bool` | `false` | no |
 | enabled\_metrics | n/a | `list` | <pre>[<br>  "GroupDesiredCapacity",<br>  "GroupInServiceCapacity",<br>  "GroupInServiceInstances",<br>  "GroupMaxSize",<br>  "GroupMinSize",<br>  "GroupPendingCapacity",<br>  "GroupPendingInstances",<br>  "GroupStandbyCapacity",<br>  "GroupStandbyInstances",<br>  "GroupTerminatingCapacity",<br>  "GroupTerminatingInstances",<br>  "GroupTotalCapacity",<br>  "GroupTotalInstances"<br>]</pre> | no |
 | instance\_type | n/a | `string` | `"m5.large"` | no |
 | key\_name | n/a | `string` | `"eks_user"` | no |
 | log\_levels | n/a | `number` | `3` | no |
-| max | n/a | `string` | `"5"` | no |
-| min | n/a | `string` | `"1"` | no |
+| max | n/a | `number` | `5` | no |
+| min | n/a | `number` | `1` | no |
 | mixed\_instances | n/a | `list(string)` | `[]` | no |
 | name | Name of the worker. e.g: worker | `string` | n/a | yes |
 | node\_labels | n/a | `map(string)` | `{}` | no |
-| on\_demand\_base | n/a | `string` | `"1"` | no |
-| on\_demand\_rate | n/a | `string` | `"30"` | no |
+| on\_demand\_base | n/a | `number` | `1` | no |
+| on\_demand\_rate | n/a | `number` | `30` | no |
 | role\_name | n/a | `string` | n/a | yes |
 | security\_groups | n/a | `list(string)` | `[]` | no |
 | subname | Subname of the worker, e.g: a | `string` | `""` | no |
