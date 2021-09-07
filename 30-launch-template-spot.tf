@@ -6,7 +6,7 @@ resource "aws_launch_template" "worker_spot" {
   name_prefix = format("%s-spot-", local.worker_name)
 
   image_id      = local.ami_id
-  instance_type = length(var.mixed_instances) > 0 ? var.mixed_instances[0] : var.instance_type
+  instance_type = local.instance_types[0]
 
   user_data = base64encode(local.user_data)
 

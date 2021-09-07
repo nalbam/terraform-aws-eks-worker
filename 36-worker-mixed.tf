@@ -1,7 +1,7 @@
 # worker for mixed
 
 resource "aws_autoscaling_group" "worker-mixed" {
-  count = length(var.mixed_instances) > 0 ? 1 : 0
+  count = length(local.instance_types) > 1 ? 1 : 0
 
   name_prefix = format("%s-%s-", local.worker_name, "mixed")
 
@@ -25,7 +25,7 @@ resource "aws_autoscaling_group" "worker-mixed" {
       }
 
       dynamic "override" {
-        for_each = var.mixed_instances
+        for_each = local.instance_types
         content {
           instance_type = override.value
         }

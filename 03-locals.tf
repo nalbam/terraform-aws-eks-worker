@@ -14,6 +14,8 @@ locals {
   worker_ami_arch    = var.worker_ami_arch == "arm64" ? "amazon-eks-arm64-node" : "amazon-eks-node"
   worker_ami_keyword = format("%s-%s-%s", local.worker_ami_arch, var.cluster_info.version, var.worker_ami_keyword)
 
+  instance_types = compact(concat([var.instance_type], var.mixed_instances))
+
   ami_id = var.ami_id != "" ? var.ami_id : data.aws_ami.worker.id
 }
 
