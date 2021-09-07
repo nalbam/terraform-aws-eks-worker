@@ -71,6 +71,11 @@ variable "associate_public_ip_address" {
   default = false
 }
 
+variable "enable_managed_nodegroup" {
+  type    = bool
+  default = false
+}
+
 variable "enable_autoscale" {
   type    = bool
   default = true
