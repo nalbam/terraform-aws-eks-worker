@@ -6,7 +6,7 @@ resource "aws_launch_template" "worker" {
   name_prefix = format("%s-", local.worker_name)
 
   image_id      = local.ami_id
-  instance_type = local.instance_types.0
+  instance_type = local.instance_types[0]
 
   user_data = base64encode(local.user_data)
 

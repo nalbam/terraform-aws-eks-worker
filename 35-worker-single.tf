@@ -1,7 +1,7 @@
 # worker for single
 
 resource "aws_autoscaling_group" "worker" {
-  count = var.enable_managed_nodegroup ? 0 : length(local.instance_types) == 1 ? 1 : 0
+  count = length(local.instance_types) == 1 ? 1 : 0
 
   name_prefix = format("%s-", local.worker_name)
 
