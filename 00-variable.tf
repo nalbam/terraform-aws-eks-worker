@@ -58,7 +58,7 @@ variable "ami_id" {
 
 variable "instance_type" {
   type    = string
-  default = "m5.large"
+  default = ""
 }
 
 variable "mixed_instances" {
