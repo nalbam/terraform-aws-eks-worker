@@ -27,7 +27,7 @@
 | enable\_spot | n/a | `bool` | `false` | no |
 | enable\_taints | n/a | `bool` | `false` | no |
 | enabled\_metrics | n/a | `list` | <pre>[<br>  "GroupDesiredCapacity",<br>  "GroupInServiceCapacity",<br>  "GroupInServiceInstances",<br>  "GroupMaxSize",<br>  "GroupMinSize",<br>  "GroupPendingCapacity",<br>  "GroupPendingInstances",<br>  "GroupStandbyCapacity",<br>  "GroupStandbyInstances",<br>  "GroupTerminatingCapacity",<br>  "GroupTerminatingInstances",<br>  "GroupTotalCapacity",<br>  "GroupTotalInstances"<br>]</pre> | no |
-| instance\_type | n/a | `string` | `"m5.large"` | no |
+| instance\_type | n/a | `string` | `""` | no |
 | key\_name | n/a | `string` | `"eks_user"` | no |
 | log\_levels | n/a | `number` | `3` | no |
 | max | n/a | `number` | `5` | no |
