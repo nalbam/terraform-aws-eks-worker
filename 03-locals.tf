@@ -25,6 +25,7 @@ locals {
       "group"         = var.name
       "subgroup"      = local.subgroup
       "instancegroup" = local.fullname
+      "lifecycle"     = var.enable_spot ? "spot" : "normal"
     },
     var.node_labels,
   )
