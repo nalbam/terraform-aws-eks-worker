@@ -27,6 +27,7 @@
 | enable\_spot | n/a | `bool` | `false` | no |
 | enable\_taints | n/a | `bool` | `false` | no |
 | enabled\_metrics | n/a | `list` | <pre>[<br>  "GroupDesiredCapacity",<br>  "GroupInServiceCapacity",<br>  "GroupInServiceInstances",<br>  "GroupMaxSize",<br>  "GroupMinSize",<br>  "GroupPendingCapacity",<br>  "GroupPendingInstances",<br>  "GroupStandbyCapacity",<br>  "GroupStandbyInstances",<br>  "GroupTerminatingCapacity",<br>  "GroupTerminatingInstances",<br>  "GroupTotalCapacity",<br>  "GroupTotalInstances"<br>]</pre> | no |
+| instance\_profile\_name | n/a | `string` | `""` | no |
 | instance\_type | n/a | `string` | `""` | no |
 | key\_name | n/a | `string` | `"eks_user"` | no |
 | log\_levels | n/a | `number` | `3` | no |
@@ -37,7 +38,7 @@
 | node\_labels | n/a | `map(string)` | `{}` | no |
 | on\_demand\_base | n/a | `number` | `1` | no |
 | on\_demand\_rate | n/a | `number` | `30` | no |
-| role\_name | n/a | `string` | n/a | yes |
+| role\_name | n/a | `string` | `""` | no |
 | security\_groups | n/a | `list(string)` | `[]` | no |
 | subname | Subname of the worker, e.g: a | `string` | `""` | no |
 | subnet\_ids | n/a | `list(string)` | `[]` | no |
@@ -51,6 +52,10 @@
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| worker\_ami\_keyword | n/a |
+| worker\_asg\_id | n/a |
+| worker\_name | n/a |
 
 <!--- END_TF_DOCS --->
