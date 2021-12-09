@@ -1,6 +1,6 @@
 # worker for mixed
 
-resource "aws_autoscaling_group" "worker-mixed" {
+resource "aws_autoscaling_group" "worker_mixed" {
   count = length(local.instance_types) > 1 ? 1 : 0
 
   name_prefix = format("%s-%s-", local.worker_name, "mixed")
