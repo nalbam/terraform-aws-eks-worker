@@ -33,7 +33,13 @@ variable "security_groups" {
 }
 
 variable "role_name" {
-  type = string
+  type    = string
+  default = ""
+}
+
+variable "instance_profile_name" {
+  type    = string
+  default = ""
 }
 
 variable "target_group_arns" {

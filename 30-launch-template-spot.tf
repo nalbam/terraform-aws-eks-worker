@@ -28,7 +28,7 @@ resource "aws_launch_template" "worker_spot" {
   }
 
   iam_instance_profile {
-    name = aws_iam_instance_profile.worker.name
+    name = local.instance_profile_name
   }
 
   network_interfaces {
