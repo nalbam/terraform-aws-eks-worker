@@ -56,6 +56,7 @@
 |------|-------------|
 | worker\_ami\_keyword | n/a |
 | worker\_asg\_id | n/a |
+| worker\_lt\_id | n/a |
 | worker\_name | n/a |
 
 <!--- END_TF_DOCS --->
