@@ -1,7 +1,7 @@
 # worker for single
 
 resource "aws_autoscaling_group" "worker" {
-  count = length(local.instance_types) == 1 ? 1 : 0
+  count = var.enable_mixed ? 0 : 1
 
   name_prefix = format("%s-", local.worker_name)
 
