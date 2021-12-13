@@ -23,6 +23,8 @@
 | cluster\_info | Map of the cluster. | `map(string)` | n/a | yes |
 | ebs\_optimized | n/a | `bool` | `true` | no |
 | enable\_autoscale | n/a | `bool` | `true` | no |
+| enable\_event | n/a | `bool` | `false` | no |
+| enable\_mixed | n/a | `bool` | `false` | no |
 | enable\_monitoring | n/a | `bool` | `true` | no |
 | enable\_spot | n/a | `bool` | `false` | no |
 | enable\_taints | n/a | `bool` | `false` | no |
@@ -55,8 +57,8 @@
 | Name | Description |
 |------|-------------|
 | worker\_ami\_keyword | n/a |
-| worker\_asg\_id | n/a |
-| worker\_lt\_id | n/a |
+| worker\_asg\_ids | n/a |
+| worker\_lt\_ids | n/a |
 | worker\_name | n/a |
 
 <!--- END_TF_DOCS --->
