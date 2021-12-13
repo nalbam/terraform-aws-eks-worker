@@ -22,6 +22,23 @@ locals {
 }
 
 locals {
+  worker_asg_ids = compact(concat(
+    aws_autoscaling_group.worker.*.id,
+    aws_autoscaling_group.worker_mixed.*.id,
+  ))
+
+  worker_asg_arns =   compact(concat(
+    aws_autoscaling_group.worker.*.arn,
+    aws_autoscaling_group.worker_mixed.*.arn,
+  ))
+
+  worker_lt_ids = compact(concat(
+    aws_launch_template.worker.*.id,
+    aws_launch_template.worker_spot.*.id,
+  ))
+}
+
+locals {
   node_labels_map = merge(
     {
       "group"         = var.name
@@ -68,6 +85,9 @@ locals {
     var.enable_autoscale ? {
       "k8s.io/cluster-autoscaler/${local.cluster_name}" = "owned"
       "k8s.io/cluster-autoscaler/enabled"               = "true"
+    } : {},
+    var.enable_event ? {
+      "aws-node-termination-handler/managed" = "true"
     } : {},
   )
 

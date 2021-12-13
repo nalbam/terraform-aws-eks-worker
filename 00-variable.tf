@@ -140,6 +140,16 @@ variable "enable_spot" {
   default = false
 }
 
+variable "enable_mixed" {
+  type    = bool
+  default = false
+}
+
+variable "enable_event" {
+  type    = bool
+  default = false
+}
+
 variable "on_demand_base" {
   type    = number
   default = 1
