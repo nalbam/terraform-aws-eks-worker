@@ -27,9 +27,14 @@ locals {
     aws_autoscaling_group.worker_mixed.*.id,
   ))
 
-  worker_asg_arns =   compact(concat(
+  worker_asg_arns = compact(concat(
     aws_autoscaling_group.worker.*.arn,
     aws_autoscaling_group.worker_mixed.*.arn,
+  ))
+
+  worker_asg_names = compact(concat(
+    aws_autoscaling_group.worker.*.name,
+    aws_autoscaling_group.worker_mixed.*.name,
   ))
 
   worker_lt_ids = compact(concat(
