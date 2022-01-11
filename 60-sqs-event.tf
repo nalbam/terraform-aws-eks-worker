@@ -111,10 +111,10 @@ resource "aws_cloudwatch_event_target" "nth_scheduled" {
 }
 
 resource "aws_autoscaling_lifecycle_hook" "nth" {
-  count = var.enable_event ? length(local.worker_asg_names) : 0
+  count = var.enable_event ? 1 : 0
 
   name                   = "aws-node-termination-handler"
-  autoscaling_group_name = local.worker_asg_names[count.index]
+  autoscaling_group_name = var.enable_mixed ? aws_autoscaling_group.worker_mixed.0.name : aws_autoscaling_group.worker.0.name
   lifecycle_transition   = "autoscaling:EC2_INSTANCE_TERMINATING"
   heartbeat_timeout      = 300
   default_result         = "CONTINUE"
