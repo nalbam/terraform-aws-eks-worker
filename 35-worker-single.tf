@@ -11,6 +11,8 @@ resource "aws_autoscaling_group" "worker" {
   vpc_zone_identifier = var.subnet_ids
   target_group_arns   = var.target_group_arns
 
+  termination_policies = ["OldestInstance"]
+
   launch_template {
     id      = var.enable_spot ? aws_launch_template.worker_spot[0].id : aws_launch_template.worker[0].id
     version = "$Latest"

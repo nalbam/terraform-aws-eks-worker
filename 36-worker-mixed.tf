@@ -11,6 +11,8 @@ resource "aws_autoscaling_group" "worker_mixed" {
   vpc_zone_identifier = var.subnet_ids
   target_group_arns   = var.target_group_arns
 
+  termination_policies = ["OldestInstance"]
+
   mixed_instances_policy {
     instances_distribution {
       on_demand_base_capacity                  = var.on_demand_base
