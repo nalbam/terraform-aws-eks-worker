@@ -1,5 +1,8 @@
 # terraform-aws-eks-worker
 
+[![build](https://img.shields.io/github/workflow/status/nalbam/terraform-aws-eks-worker/build?label=build&style=for-the-badge&logo=github)](https://github.com/nalbam/terraform-aws-eks-worker/actions/workflows/push.yaml)
+[![release](https://img.shields.io/github/v/release/nalbam/terraform-aws-eks-worker?style=for-the-badge&logo=github)](https://github.com/nalbam/terraform-aws-eks-worker/releases)
+
 <!--- BEGIN_TF_DOCS --->
 ## Requirements
 
