@@ -63,7 +63,7 @@ resource "aws_cloudwatch_event_rule" "nth_state" {
 
   name        = format("%s-state-change", local.worker_name)
   description = "Node termination event rule"
-    event_pattern = jsonencode(
+  event_pattern = jsonencode(
     {
       "source" : [
         "aws.ec2"
@@ -89,7 +89,7 @@ resource "aws_cloudwatch_event_rule" "nth_scheduled" {
 
   name        = format("%s-scheduled-change", local.worker_name)
   description = "Node termination event rule"
-    event_pattern = jsonencode(
+  event_pattern = jsonencode(
     {
       "source" : [
         "aws.health"
@@ -118,4 +118,13 @@ resource "aws_autoscaling_lifecycle_hook" "nth" {
   lifecycle_transition   = "autoscaling:EC2_INSTANCE_TERMINATING"
   heartbeat_timeout      = 300
   default_result         = "CONTINUE"
+
+  notification_metadata = <<EOF
+{
+  "WorkerName" = ${local.worker_name}
+}
+EOF
+
+  # notification_target_arn = data.aws_sqs_queue.nth.0.arn
+  # role_arn                = ""
 }
