@@ -119,12 +119,6 @@ resource "aws_autoscaling_lifecycle_hook" "nth" {
   heartbeat_timeout      = 300
   default_result         = "CONTINUE"
 
-  notification_metadata = <<EOF
-{
-  "WorkerName" = ${local.worker_name}
-}
-EOF
-
   # notification_target_arn = data.aws_sqs_queue.nth.0.arn
   # role_arn                = ""
 }
