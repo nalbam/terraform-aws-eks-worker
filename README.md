@@ -34,6 +34,7 @@
 | enabled\_metrics | n/a | `list` | <pre>[<br>  "GroupDesiredCapacity",<br>  "GroupInServiceCapacity",<br>  "GroupInServiceInstances",<br>  "GroupMaxSize",<br>  "GroupMinSize",<br>  "GroupPendingCapacity",<br>  "GroupPendingInstances",<br>  "GroupStandbyCapacity",<br>  "GroupStandbyInstances",<br>  "GroupTerminatingCapacity",<br>  "GroupTerminatingInstances",<br>  "GroupTotalCapacity",<br>  "GroupTotalInstances"<br>]</pre> | no |
 | instance\_profile\_name | n/a | `string` | `""` | no |
 | instance\_type | n/a | `string` | `""` | no |
+| ipv6\_address\_count | n/a | `number` | `0` | no |
 | key\_name | n/a | `string` | `"eks_user"` | no |
 | log\_levels | n/a | `number` | `3` | no |
 | max | n/a | `number` | `5` | no |

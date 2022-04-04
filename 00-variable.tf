@@ -72,6 +72,11 @@ variable "mixed_instances" {
   default = []
 }
 
+variable "ipv6_address_count" {
+  type    = number
+  default = 0
+}
+
 variable "associate_public_ip_address" {
   type    = bool
   default = false

@@ -33,6 +33,7 @@ resource "aws_launch_template" "worker_spot" {
 
   network_interfaces {
     delete_on_termination       = true
+    ipv6_address_count          = var.ipv6_address_count
     associate_public_ip_address = var.associate_public_ip_address
     security_groups             = var.security_groups
   }
