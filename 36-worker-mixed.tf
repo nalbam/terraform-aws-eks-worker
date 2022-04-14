@@ -42,5 +42,12 @@ resource "aws_autoscaling_group" "worker_mixed" {
     ignore_changes        = [desired_capacity]
   }
 
-  tags = local.asg_tags
+  dynamic "tag" {
+    for_each = local.eks_tags
+    content {
+      key                 = tag.key
+      value               = tag.value
+      propagate_at_launch = true
+    }
+  }
 }
