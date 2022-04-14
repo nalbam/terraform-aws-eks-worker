@@ -95,13 +95,4 @@ locals {
       "aws-node-termination-handler/managed" = "true"
     } : {},
   )
-
-  asg_tags = [
-    for item in keys(local.eks_tags) :
-    tomap({
-      "key"                 = item
-      "value"               = element(values(local.eks_tags), index(keys(local.eks_tags), item))
-      "propagate_at_launch" = true
-    })
-  ]
 }
