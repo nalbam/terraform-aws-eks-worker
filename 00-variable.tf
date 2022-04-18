@@ -152,7 +152,7 @@ variable "enable_mixed" {
 
 variable "enable_event" {
   type    = bool
-  default = false
+  default = true
 }
 
 variable "on_demand_base" {
