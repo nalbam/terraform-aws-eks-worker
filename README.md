@@ -26,7 +26,7 @@
 | cluster\_info | Map of the cluster. | `map(string)` | n/a | yes |
 | ebs\_optimized | n/a | `bool` | `true` | no |
 | enable\_autoscale | n/a | `bool` | `true` | no |
-| enable\_event | n/a | `bool` | `false` | no |
+| enable\_event | n/a | `bool` | `true` | no |
 | enable\_mixed | n/a | `bool` | `false` | no |
 | enable\_monitoring | n/a | `bool` | `true` | no |
 | enable\_spot | n/a | `bool` | `false` | no |
