@@ -62,14 +62,14 @@ locals {
 
   user_data = <<EOF
 #!/bin/bash -xe
-mkdir -p ~/.docker && echo '${data.aws_ssm_parameter.docker_config.value}' > ~/.docker/config.json
-mkdir -p /var/lib/kubelet && echo '${data.aws_ssm_parameter.docker_config.value}' > /var/lib/kubelet/config.json
-echo '${data.aws_ssm_parameter.containerd_config.value}' >> /etc/containerd/config.toml
 /etc/eks/bootstrap.sh \
   --apiserver-endpoint '${var.cluster_info.endpoint}' \
   --b64-cluster-ca '${var.cluster_info.certificate_authority}' \
   --kubelet-extra-args '${local.extra_args}' \
   '${local.cluster_name}'
+mkdir -p ~/.docker && echo '${data.aws_ssm_parameter.docker_config.value}' > ~/.docker/config.json
+mkdir -p /var/lib/kubelet && echo '${data.aws_ssm_parameter.docker_config.value}' > /var/lib/kubelet/config.json
+echo '${data.aws_ssm_parameter.containerd_config.value}' >> /etc/containerd/config.toml
 EOF
 }
 
