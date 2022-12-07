@@ -23,7 +23,7 @@
 |------|-------------|------|---------|:--------:|
 | ami\_id | n/a | `string` | `""` | no |
 | associate\_public\_ip\_address | n/a | `bool` | `false` | no |
-| cluster\_info | Map of the cluster. | `map(string)` | n/a | yes |
+| cluster\_name | Name of the cluster, e.g: cluster | `any` | n/a | yes |
 | ebs\_optimized | n/a | `bool` | `true` | no |
 | enable\_autoscale | n/a | `bool` | `true` | no |
 | enable\_event | n/a | `bool` | `true` | no |
@@ -36,6 +36,7 @@
 | instance\_type | n/a | `string` | `""` | no |
 | ipv6\_address\_count | n/a | `number` | `0` | no |
 | key\_name | n/a | `string` | `"eks_user"` | no |
+| kubernetes\_version | Version of the kubernetes, e.g: 1.21 | `string` | `""` | no |
 | log\_levels | n/a | `number` | `3` | no |
 | max | n/a | `number` | `5` | no |
 | min | n/a | `number` | `1` | no |

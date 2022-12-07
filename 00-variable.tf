@@ -17,9 +17,14 @@ variable "vername" {
   default     = ""
 }
 
-variable "cluster_info" {
-  description = "Map of the cluster."
-  type        = map(string)
+variable "cluster_name" {
+  description = "Name of the cluster, e.g: cluster"
+  # default   = "cluster"
+}
+
+variable "kubernetes_version" {
+  description = "Version of the kubernetes, e.g: 1.21"
+  default     = ""
 }
 
 variable "subnet_ids" {
