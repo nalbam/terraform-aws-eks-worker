@@ -17,3 +17,7 @@ data "aws_ami" "worker" {
 data "aws_ssm_parameter" "docker_config" {
   name = format("/k8s/common/%s", "docker-config")
 }
+
+data "aws_ssm_parameter" "containerd_config" {
+  name = format("/k8s/common/%s", "containerd-config")
+}
