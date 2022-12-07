@@ -8,11 +8,12 @@ locals {
   subgroup = var.subname == "" ? var.name : format("%s-%s", var.name, var.subname)
   fullname = var.vername == "" ? local.subgroup : format("%s-%s", local.subgroup, var.vername)
 
-  cluster_name = var.cluster_info.name
+  cluster_name = var.cluster_name
+  worker_group = format("%s-%s", local.cluster_name, var.name)
   worker_name  = format("%s-%s", local.cluster_name, local.fullname)
 
   worker_ami_arch    = var.worker_ami_arch == "arm64" ? "amazon-eks-arm64-node" : "amazon-eks-node"
-  worker_ami_keyword = format("%s-%s-%s", local.worker_ami_arch, var.cluster_info.version, var.worker_ami_keyword)
+  worker_ami_keyword = format("%s-%s-%s", local.worker_ami_arch, var.kubernetes_version, var.worker_ami_keyword)
 
   instance_types = compact(concat([var.instance_type], var.mixed_instances))
 
@@ -61,13 +62,13 @@ locals {
   extra_args = "--node-labels=${local.node_labels} ${local.node_taints} ${local.log_levels}"
 
   user_data = <<EOF
+#!/bin/bash -xe
 mkdir -p ~/.docker && echo '${data.aws_ssm_parameter.docker_config.value}' > ~/.docker/config.json
 mkdir -p /var/lib/kubelet && echo '${data.aws_ssm_parameter.docker_config.value}' > /var/lib/kubelet/config.json
 echo '${data.aws_ssm_parameter.containerd_config.value}' >> /etc/eks/containerd/containerd-config.toml
-#!/bin/bash -xe
 /etc/eks/bootstrap.sh \
-  --apiserver-endpoint '${var.cluster_info.endpoint}' \
-  --b64-cluster-ca '${var.cluster_info.certificate_authority}' \
+  --apiserver-endpoint '${data.aws_eks_cluster.cluster.endpoint}' \
+  --b64-cluster-ca '${data.aws_eks_cluster.cluster.certificate_authority.0.data}' \
   --kubelet-extra-args '${local.extra_args}' \
   '${local.cluster_name}'
 EOF
@@ -78,8 +79,10 @@ locals {
     var.tags,
     {
       "Name"                                        = local.worker_name
+      "KubernetesNodeGroup"                         = local.worker_group
       "KubernetesCluster"                           = local.cluster_name
       "kubernetes.io/cluster/${local.cluster_name}" = "owned"
+      "krmt.io/cluster"                             = local.cluster_name
       "krmt.io/group"                               = var.name
       "krmt.io/subgroup"                            = local.subgroup
       "krmt.io/instancegroup"                       = local.fullname
