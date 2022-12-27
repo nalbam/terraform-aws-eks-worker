@@ -23,6 +23,7 @@
 |------|-------------|------|---------|:--------:|
 | ami\_id | n/a | `string` | `""` | no |
 | associate\_public\_ip\_address | n/a | `bool` | `false` | no |
+| capacity\_rebalance | n/a | `bool` | `true` | no |
 | cluster\_name | Name of the cluster, e.g: cluster | `any` | n/a | yes |
 | ebs\_optimized | n/a | `bool` | `true` | no |
 | enable\_autoscale | n/a | `bool` | `true` | no |
@@ -43,10 +44,11 @@
 | mixed\_instances | n/a | `list(string)` | `[]` | no |
 | name | Name of the worker. e.g: worker | `string` | n/a | yes |
 | node\_labels | n/a | `map(string)` | `{}` | no |
-| on\_demand\_base | n/a | `number` | `1` | no |
+| on\_demand\_base | n/a | `number` | `2` | no |
 | on\_demand\_rate | n/a | `number` | `30` | no |
 | role\_name | n/a | `string` | `""` | no |
 | security\_groups | n/a | `list(string)` | `[]` | no |
+| spot\_allocation\_strategy | n/a | `string` | `"price-capacity-optimized"` | no |
 | subname | Subname of the worker, e.g: a | `string` | `""` | no |
 | subnet\_ids | n/a | `list(string)` | `[]` | no |
 | tags | n/a | `map(string)` | `{}` | no |
