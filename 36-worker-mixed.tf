@@ -8,6 +8,8 @@ resource "aws_autoscaling_group" "worker_mixed" {
   min_size = var.min
   max_size = var.max
 
+  capacity_rebalance  = var.capacity_rebalance
+
   vpc_zone_identifier = var.subnet_ids
   target_group_arns   = var.target_group_arns
 
@@ -17,7 +19,7 @@ resource "aws_autoscaling_group" "worker_mixed" {
     instances_distribution {
       on_demand_base_capacity                  = var.on_demand_base
       on_demand_percentage_above_base_capacity = var.on_demand_rate
-      spot_allocation_strategy                 = "capacity-optimized"
+      spot_allocation_strategy                 = var.spot_allocation_strategy
     }
 
     launch_template {

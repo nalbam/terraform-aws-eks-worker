@@ -92,9 +92,19 @@ variable "enable_autoscale" {
   default = true
 }
 
+variable "enable_event" {
+  type    = bool
+  default = true
+}
+
 variable "enable_monitoring" {
   type    = bool
   default = true
+}
+
+variable "enable_taints" {
+  type    = bool
+  default = false
 }
 
 variable "enabled_metrics" {
@@ -113,11 +123,6 @@ variable "enabled_metrics" {
     "GroupTotalCapacity",
     "GroupTotalInstances",
   ]
-}
-
-variable "enable_taints" {
-  type    = bool
-  default = false
 }
 
 variable "ebs_optimized" {
@@ -155,19 +160,25 @@ variable "enable_mixed" {
   default = false
 }
 
-variable "enable_event" {
+variable "capacity_rebalance" {
   type    = bool
   default = true
 }
 
 variable "on_demand_base" {
   type    = number
-  default = 1
+  default = 2
 }
 
 variable "on_demand_rate" {
   type    = number
   default = 30
+}
+
+variable "spot_allocation_strategy" {
+  type    = string
+  default = "price-capacity-optimized"
+  # lowest-price, capacity-optimized, capacity-optimized-prioritized, price-capacity-optimized
 }
 
 variable "log_levels" {

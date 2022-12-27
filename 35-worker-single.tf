@@ -8,6 +8,8 @@ resource "aws_autoscaling_group" "worker" {
   min_size = var.min
   max_size = var.max
 
+  capacity_rebalance  = var.capacity_rebalance
+
   vpc_zone_identifier = var.subnet_ids
   target_group_arns   = var.target_group_arns
 
