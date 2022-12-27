@@ -48,9 +48,11 @@ locals {
   node_labels_map = merge(
     {
       "group"         = var.name
-      "subgroup"      = local.subgroup
       "instancegroup" = local.fullname
-      "lifecycle"     = var.enable_spot ? "spot" : "normal"
+      "subgroup"      = local.subgroup
+      "subname"       = var.subname
+      "vername"       = var.vername
+      "lifecycle"     = var.enable_mixed ? "mixed" : var.enable_spot ? "spot" : "normal"
     },
     var.node_labels,
   )
