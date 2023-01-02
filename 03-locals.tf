@@ -50,10 +50,13 @@ locals {
       "group"         = var.name
       "instancegroup" = local.fullname
       "subgroup"      = local.subgroup
-      "subname"       = var.subname
-      "vername"       = var.vername
-      "lifecycle"     = var.enable_mixed ? "mixed" : var.enable_spot ? "spot" : "normal"
     },
+    var.subname != "" ? {
+      "subname" = var.subname
+    } : {},
+    var.vername != "" ? {
+      "vername" = var.vername
+    } : {},
     var.node_labels,
   )
 
@@ -61,17 +64,24 @@ locals {
   node_taints = var.enable_taints ? format("--register-with-taints=group=%s:NoSchedule", var.name) : ""
   log_levels  = var.log_levels > 0 ? format("--v=%s", var.log_levels) : ""
 
-  extra_args = "--node-labels=${local.node_labels} ${local.node_taints} ${local.log_levels}"
+  extra_args = "${local.node_taints} ${local.log_levels} --node-labels=${local.node_labels}"
 
   user_data = <<EOF
 #!/bin/bash -xe
 mkdir -p ~/.docker && echo '${data.aws_ssm_parameter.docker_config.value}' > ~/.docker/config.json
 mkdir -p /var/lib/kubelet && echo '${data.aws_ssm_parameter.docker_config.value}' > /var/lib/kubelet/config.json
 echo '${data.aws_ssm_parameter.containerd_config.value}' >> /etc/eks/containerd/containerd-config.toml
+
+aws_region=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone | sed 's/\(.*\)[a-z]/\1/')
+aws_instance_id=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
+aws_instance_lifecycle=$(curl -s http://169.254.169.254/latest/meta-data/instance-life-cycle)
+
+aws ec2 create-tags --resources $aws_instance_id --region $aws_region --tags Key=Lifecycle,Value=$aws_instance_lifecycle
+
 /etc/eks/bootstrap.sh \
   --apiserver-endpoint '${data.aws_eks_cluster.cluster.endpoint}' \
   --b64-cluster-ca '${data.aws_eks_cluster.cluster.certificate_authority.0.data}' \
-  --kubelet-extra-args '${local.extra_args}' \
+  --kubelet-extra-args "${local.extra_args},lifecycle=$aws_instance_lifecycle" \
   '${local.cluster_name}'
 EOF
 }

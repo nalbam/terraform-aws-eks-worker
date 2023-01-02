@@ -65,7 +65,7 @@ resource "aws_cloudwatch_event_target" "nth_spot" {
 # EC2 Instance Rebalance Recommendation
 
 resource "aws_cloudwatch_event_rule" "nth_rebal" {
-  count = var.enable_event ? 1 : 0
+  count = var.enable_event ? var.capacity_rebalance ? 1 : 0 : 0
 
   name        = format("%s-rebalance", local.worker_name)
   description = "EC2 Instance Rebalance Recommendation"
@@ -83,7 +83,7 @@ resource "aws_cloudwatch_event_rule" "nth_rebal" {
 }
 
 resource "aws_cloudwatch_event_target" "nth_rebal" {
-  count = var.enable_event ? 1 : 0
+  count = var.enable_event ? var.capacity_rebalance ? 1 : 0 : 0
 
   target_id = format("%s-rebalance", local.worker_name)
   rule      = aws_cloudwatch_event_rule.nth_rebal.0.name

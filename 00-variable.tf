@@ -162,7 +162,7 @@ variable "enable_mixed" {
 
 variable "capacity_rebalance" {
   type    = bool
-  default = true
+  default = false
 }
 
 variable "on_demand_base" {
