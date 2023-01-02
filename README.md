@@ -23,7 +23,7 @@
 |------|-------------|------|---------|:--------:|
 | ami\_id | n/a | `string` | `""` | no |
 | associate\_public\_ip\_address | n/a | `bool` | `false` | no |
-| capacity\_rebalance | n/a | `bool` | `true` | no |
+| capacity\_rebalance | n/a | `bool` | `false` | no |
 | cluster\_name | Name of the cluster, e.g: cluster | `any` | n/a | yes |
 | ebs\_optimized | n/a | `bool` | `true` | no |
 | enable\_autoscale | n/a | `bool` | `true` | no |
