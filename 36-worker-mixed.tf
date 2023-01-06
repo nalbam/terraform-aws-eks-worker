@@ -19,7 +19,7 @@ resource "aws_autoscaling_group" "worker_mixed" {
     instances_distribution {
       on_demand_base_capacity                  = var.on_demand_base
       on_demand_percentage_above_base_capacity = var.on_demand_rate
-      spot_allocation_strategy                 = var.spot_allocation_strategy
+      spot_allocation_strategy                 = var.spot_strategy
     }
 
     launch_template {
@@ -32,6 +32,7 @@ resource "aws_autoscaling_group" "worker_mixed" {
         for_each = local.instance_types
         content {
           instance_type = override.value
+          # weighted_capacity = 10
         }
       }
     }
