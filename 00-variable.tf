@@ -132,7 +132,7 @@ variable "ebs_optimized" {
 
 variable "volume_type" {
   type    = string
-  default = "gp2"
+  default = "gp3"
 }
 
 variable "volume_size" {
@@ -147,7 +147,7 @@ variable "min" {
 
 variable "max" {
   type    = number
-  default = 5
+  default = 6
 }
 
 variable "enable_spot" {
@@ -175,9 +175,9 @@ variable "on_demand_rate" {
   default = 30
 }
 
-variable "spot_allocation_strategy" {
+variable "spot_strategy" {
   type    = string
-  default = "price-capacity-optimized"
+  default = "capacity-optimized"
   # lowest-price, capacity-optimized, capacity-optimized-prioritized, price-capacity-optimized
 }
 

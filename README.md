@@ -39,7 +39,7 @@
 | key\_name | n/a | `string` | `"eks_user"` | no |
 | kubernetes\_version | Version of the kubernetes, e.g: 1.21 | `string` | `""` | no |
 | log\_levels | n/a | `number` | `3` | no |
-| max | n/a | `number` | `5` | no |
+| max | n/a | `number` | `6` | no |
 | min | n/a | `number` | `1` | no |
 | mixed\_instances | n/a | `list(string)` | `[]` | no |
 | name | Name of the worker. e.g: worker | `string` | n/a | yes |
@@ -48,14 +48,14 @@
 | on\_demand\_rate | n/a | `number` | `30` | no |
 | role\_name | n/a | `string` | `""` | no |
 | security\_groups | n/a | `list(string)` | `[]` | no |
-| spot\_allocation\_strategy | n/a | `string` | `"price-capacity-optimized"` | no |
+| spot\_strategy | n/a | `string` | `"capacity-optimized"` | no |
 | subname | Subname of the worker, e.g: a | `string` | `""` | no |
 | subnet\_ids | n/a | `list(string)` | `[]` | no |
 | tags | n/a | `map(string)` | `{}` | no |
 | target\_group\_arns | n/a | `list(string)` | `[]` | no |
 | vername | Version of the worker, e.g: v1 | `string` | `""` | no |
 | volume\_size | n/a | `string` | `"50"` | no |
-| volume\_type | n/a | `string` | `"gp2"` | no |
+| volume\_type | n/a | `string` | `"gp3"` | no |
 | worker\_ami\_arch | n/a | `string` | `"x86_64"` | no |
 | worker\_ami\_keyword | n/a | `string` | `"*"` | no |
 
