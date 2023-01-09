@@ -108,7 +108,7 @@ locals {
       "k8s.io/cluster-autoscaler/enabled"               = "true"
     } : {},
     var.enable_event ? {
-      "aws-node-termination-handler/managed" = "true"
+      "aws-node-termination-handler/${local.cluster_name}" = "true"
     } : {},
   )
 }
