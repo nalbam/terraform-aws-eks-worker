@@ -46,6 +46,7 @@
 | node\_labels | n/a | `map(string)` | `{}` | no |
 | on\_demand\_base | n/a | `number` | `2` | no |
 | on\_demand\_rate | n/a | `number` | `30` | no |
+| protect\_from\_scale\_in | n/a | `bool` | `false` | no |
 | role\_name | n/a | `string` | `""` | no |
 | security\_groups | n/a | `list(string)` | `[]` | no |
 | spot\_strategy | n/a | `string` | `"capacity-optimized"` | no |

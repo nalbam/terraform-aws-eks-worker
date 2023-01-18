@@ -160,6 +160,11 @@ variable "enable_mixed" {
   default = false
 }
 
+variable "protect_from_scale_in" {
+  type    = bool
+  default = false
+}
+
 variable "capacity_rebalance" {
   type    = bool
   default = false
