@@ -1,5 +1,13 @@
 # variable
 
+variable "region" {
+  type = string
+}
+
+variable "account_id" {
+  type = string
+}
+
 variable "name" {
   description = "Name of the worker. e.g: worker"
   type        = string
@@ -19,12 +27,20 @@ variable "vername" {
 
 variable "cluster_name" {
   description = "Name of the cluster, e.g: cluster"
-  # default   = "cluster"
+  type        = string
+}
+
+variable "cluster_endpoint" {
+  type = string
+}
+
+variable "cluster_certificate_authority" {
+  type = string
 }
 
 variable "kubernetes_version" {
-  description = "Version of the kubernetes, e.g: 1.21"
-  default     = ""
+  description = "Version of the kubernetes, e.g: 1.28"
+  type        = string
 }
 
 variable "subnet_ids" {
@@ -52,12 +68,17 @@ variable "target_group_arns" {
   default = []
 }
 
-variable "worker_ami_arch" {
+variable "http_tokens" {
+  type    = string
+  default = "optional" # required
+}
+
+variable "ami_arch" {
   type    = string
   default = "x86_64" # arm64
 }
 
-variable "worker_ami_keyword" {
+variable "ami_keyword" {
   type    = string
   default = "*"
 }
@@ -108,6 +129,7 @@ variable "enable_taints" {
 }
 
 variable "enabled_metrics" {
+  type = list(string)
   default = [
     "GroupDesiredCapacity",
     "GroupInServiceCapacity",
@@ -160,14 +182,28 @@ variable "enable_mixed" {
   default = false
 }
 
+variable "capacity_rebalance" {
+  type    = bool
+  default = false
+}
+
 variable "protect_from_scale_in" {
   type    = bool
   default = false
 }
 
-variable "capacity_rebalance" {
-  type    = bool
-  default = false
+variable "suspended_processes" {
+  type = list(string)
+  default = [
+    # "AZRebalance",
+  ]
+}
+
+variable "termination_policies" {
+  type = list(string)
+  default = [
+    "Default",
+  ]
 }
 
 variable "on_demand_base" {
@@ -182,7 +218,7 @@ variable "on_demand_rate" {
 
 variable "spot_strategy" {
   type    = string
-  default = "capacity-optimized"
+  default = "price-capacity-optimized"
   # lowest-price, capacity-optimized, capacity-optimized-prioritized, price-capacity-optimized
 }
 
@@ -204,4 +240,14 @@ variable "tags" {
 variable "node_labels" {
   type    = map(string)
   default = {}
+}
+
+variable "additional_user_data" {
+  type    = string
+  default = ""
+}
+
+variable "additional_extra_args" {
+  type    = string
+  default = ""
 }
