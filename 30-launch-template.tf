@@ -1,8 +1,6 @@
 # launch_template
 
 resource "aws_launch_template" "worker" {
-  count = var.enable_spot ? 0 : 1
-
   name_prefix = format("%s-", local.worker_name)
 
   image_id      = local.ami_id
@@ -23,12 +21,25 @@ resource "aws_launch_template" "worker" {
     }
   }
 
-  monitoring {
-    enabled = var.enable_monitoring
+  dynamic "instance_market_options" {
+    for_each = local.instance_market_options
+    content {
+      market_type = instance_market_options.value["market_type"]
+    }
   }
 
   iam_instance_profile {
     name = local.instance_profile_name
+  }
+
+  metadata_options {
+    http_endpoint               = "enabled"
+    http_tokens                 = var.http_tokens
+    http_put_response_hop_limit = 1
+  }
+
+  monitoring {
+    enabled = var.enable_monitoring
   }
 
   network_interfaces {
