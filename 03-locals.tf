@@ -79,7 +79,7 @@ aws_instance_id=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
 aws_instance_lifecycle=$(curl -s http://169.254.169.254/latest/meta-data/instance-life-cycle)
 aws ec2 create-tags --resources $aws_instance_id --region $aws_region --tags Key=Lifecycle,Value=$aws_instance_lifecycle
 
-levels="lifecycle=$aws_instance_lifecycle,krmt.io/lifecycle=$aws_instance_lifecycle"
+levels="lifecycle=$aws_instance_lifecycle"
 
 ${var.additional_user_data}
 
