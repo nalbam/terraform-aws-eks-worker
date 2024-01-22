@@ -100,6 +100,7 @@ locals {
       "KubernetesNodeGroup"                         = local.worker_group
       "kubernetes.io/cluster/${local.cluster_name}" = "owned"
     },
+    local.node_labels_map,
   )
 
   eks_tags = merge(
