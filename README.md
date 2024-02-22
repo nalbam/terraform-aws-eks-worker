@@ -40,7 +40,7 @@
 | enable\_spot | n/a | `bool` | `false` | no |
 | enable\_taints | n/a | `bool` | `false` | no |
 | enabled\_metrics | n/a | `list(string)` | <pre>[<br>  "GroupDesiredCapacity",<br>  "GroupInServiceCapacity",<br>  "GroupInServiceInstances",<br>  "GroupMaxSize",<br>  "GroupMinSize",<br>  "GroupPendingCapacity",<br>  "GroupPendingInstances",<br>  "GroupStandbyCapacity",<br>  "GroupStandbyInstances",<br>  "GroupTerminatingCapacity",<br>  "GroupTerminatingInstances",<br>  "GroupTotalCapacity",<br>  "GroupTotalInstances"<br>]</pre> | no |
-| http\_tokens | n/a | `string` | `"required"` | no |
+| http\_tokens | n/a | `string` | `"optional"` | no |
 | instance\_profile\_name | n/a | `string` | `""` | no |
 | instance\_type | n/a | `string` | `""` | no |
 | ipv6\_address\_count | n/a | `number` | `0` | no |
