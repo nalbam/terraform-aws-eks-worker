@@ -70,7 +70,7 @@ variable "target_group_arns" {
 
 variable "http_tokens" {
   type    = string
-  default = "required"
+  default = "optional" # required
 }
 
 variable "ami_arch" {
